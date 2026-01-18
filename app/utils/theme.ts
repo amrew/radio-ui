@@ -13,8 +13,11 @@ export type ThemeVariant =
 const THEME_COOKIE_NAME = "radio-theme";
 const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-export function getThemeFromCookie(cookieHeader: string | null): ThemeVariant {
-  if (!cookieHeader) return "minimalist";
+export function getThemeFromCookie(
+  cookieHeader: string | null,
+  defaultTheme: ThemeVariant = "minimalist",
+): ThemeVariant {
+  if (!cookieHeader) return defaultTheme;
 
   const cookies = cookieHeader.split(";").reduce(
     (acc, cookie) => {
@@ -35,7 +38,8 @@ export function getThemeFromCookie(cookieHeader: string | null): ThemeVariant {
   if (theme === "vinyl") return "vinyl";
   if (theme === "ipod") return "ipod";
   if (theme === "retroradio") return "retroradio";
-  return "minimalist";
+  if (theme === "minimalist") return "minimalist";
+  return defaultTheme;
 }
 
 export function setThemeCookie(theme: ThemeVariant): string {

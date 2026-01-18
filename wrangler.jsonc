@@ -7,8 +7,6 @@
   "vars": {
     "STATION_TITLE": "Radio Al Anshar Jogja",
     "SHOUTCAST_URL": "http://alanshar.radioislam.my.id:8080",
-    "PLAYING_URL": "https://proxy.dev.al-faidah.com/stations/alanshar.radioislam.my.id/8080/radio.mp3?sid=1",
-    // "SHOUTCAST_URL": "http://103.241.192.143:8550",
-    // "PLAYING_URL": "https://proxy.dev.al-faidah.com/stations/103.241.192.143/8550/radio.mp3?sid=1",
+    "DEFAULT_THEME": "minimalist",
   },
 }

@@ -1,13 +1,14 @@
 import type { Route } from "./+types/_index";
 import { RadioPlayer } from "~/components/radio";
 import { getThemeFromCookie } from "~/utils/theme";
+import { getProxyUrl } from "~/utils/url";
 
-export function meta({}: Route.MetaArgs) {
+export function meta(args: Route.MetaArgs) {
   return [
-    { title: "Radio Player - Live Streaming" },
+    { title: `${args.loaderData.stationTitle}` },
     {
       name: "description",
-      content: "Modern Shoutcast Radio Player",
+      content: `${args.loaderData.stationTitle} - Radio Live Streaming`,
     },
     {
       name: "viewport",
@@ -18,13 +19,17 @@ export function meta({}: Route.MetaArgs) {
 
 export async function loader({ context, request }: Route.LoaderArgs) {
   const url = new URL(request.url);
-  const playingUrl = context.cloudflare.env.PLAYING_URL;
-  const theme = getThemeFromCookie(request.headers.get("Cookie"));
+  const stationUrl = context.cloudflare.env.SHOUTCAST_URL;
+  const stationTitle = context.cloudflare.env.STATION_TITLE;
+  const defaultTheme = context.cloudflare.env.DEFAULT_THEME;
 
+  const theme = getThemeFromCookie(request.headers.get("Cookie"), defaultTheme);
+  const playingUrl = getProxyUrl(stationUrl);
   return {
     url,
     playingUrl,
     theme,
+    stationTitle,
   };
 }
 
