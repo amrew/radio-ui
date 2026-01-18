@@ -29,6 +29,63 @@ Install the dependencies:
 npm install
 ```
 
+### What is Wrangler?
+
+**Wrangler** is the official CLI tool for Cloudflare Workers. It helps you develop, test, and deploy applications to Cloudflare's edge network.
+
+This project runs on **Cloudflare Workers**, which means your radio player will be deployed globally across Cloudflare's network for ultra-fast performance worldwide.
+
+#### First Time Setup
+
+If this is your first time working with Cloudflare Workers, you'll need to:
+
+1. **Create a Cloudflare account** (free tier available):
+   - Visit [dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up)
+   - Sign up for a free account
+
+2. **Login to Wrangler**:
+   ```bash
+   npx wrangler login
+   ```
+   This will open your browser to authenticate with Cloudflare.
+
+3. **Verify your login**:
+   ```bash
+   npx wrangler whoami
+   ```
+   You should see your Cloudflare account email.
+
+#### Understanding `wrangler.jsonc`
+
+The `wrangler.jsonc` file contains your Worker configuration:
+
+```jsonc
+{
+  "name": "alanshor-radio",           // Your Worker's name
+  "compatibility_date": "2025-04-04", // Cloudflare runtime version
+  "vars": {
+    "STATION_TITLE": "Radio Al Anshar Jogja",  // Your radio station name
+    "SHOUTCAST_URL": "http://...",              // Your Shoutcast server URL
+    "DEFAULT_THEME": "minimalist"               // Default UI theme
+  }
+}
+```
+
+**To customize for your own radio station**, edit these values in `wrangler.jsonc`:
+- `STATION_TITLE`: Your radio station's name
+- `SHOUTCAST_URL`: Your Shoutcast/Icecast server URL
+- `DEFAULT_THEME`: Choose from these themes:
+  - `minimalist` - Clean, minimal design
+  - `cheerful` - Bright and colorful
+  - `retro` - Vintage aesthetic
+  - `dark` - Dark mode
+  - `radio` - Classic radio style
+  - `ios` - iOS-inspired design
+  - `pastel` - Soft pastel colors
+  - `vinyl` - Vinyl record style
+  - `ipod` - iPod-inspired design
+  - `retroradio` - Retro radio aesthetic
+
 ### Development
 
 Start the development server:
@@ -43,9 +100,11 @@ Your application will be available at `http://localhost:5173`.
 
 Radio stream configuration is managed in `wrangler.jsonc`:
 
-- `STATION_TITLE`: Radio station name
-- `SHOUTCAST_URL`: Shoutcast server URL
-- `PLAYING_URL`: Streaming proxy URL
+- `STATION_TITLE`: Your radio station's display name
+- `SHOUTCAST_URL`: Your Shoutcast/Icecast server URL (e.g., `http://yourserver.com:8080`)
+- `DEFAULT_THEME`: Default UI theme - choose from `minimalist`, `cheerful`, `retro`, `dark`, `radio`, `ios`, `pastel`, `vinyl`, `ipod`, or `retroradio`
+
+**Note**: The app automatically generates a proxy URL from your `SHOUTCAST_URL` to handle CORS and streaming optimization.
 
 ## Previewing the Production Build
 
