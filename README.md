@@ -1,24 +1,23 @@
-# Jadwal Jumat - Jadwal Khotib Jumat
+# Radio Al Anshar Jogja - Live Streaming Radio Player
 
-Aplikasi web untuk menampilkan jadwal sholat Jumat untuk para ustadz di masjid-masjid Ma'had Al-Anshar.
+Modern web-based radio player for Radio Al Anshar Jogja live streaming.
 
 ## Fitur
 
-- 📅 **Tampilan Jadwal Jumat Terdekat** - Otomatis menampilkan jadwal Jumat yang akan datang
-- ⬅️➡️ **Navigasi Swipe** - Geser kanan/kiri untuk melihat jadwal Jumat berikutnya atau sebelumnya
-- 🔍 **Pencarian Ustadz** - Cari jadwal berdasarkan nama ustadz
-- 🕌 **21 Masjid** - Menampilkan jadwal untuk 21 masjid tetap
+- 🎵 **Live Audio Streaming** - Stream langsung dari Radio Al Anshar Jogja
+- ▶️ **Modern Audio Player** - Kontrol play/pause dengan UI yang intuitif
 - 📱 **Responsive Design** - Tampilan optimal di mobile dan desktop
-- ☁️ **Cloudflare Workers** - Deploy ke edge untuk performa maksimal
-- 💾 **D1 Database** - Database SQLite di Cloudflare
+- 🎨 **Theme Support** - Dukungan tema terang dan gelap
+- ☁️ **Cloudflare Workers** - Deploy ke edge untuk performa maksimal dan latensi rendah
+- 🔊 **Howler.js Audio Engine** - Audio playback yang handal dan cross-browser
 
 ## Teknologi
 
 - **Framework**: React Router v7
-- **Database**: Cloudflare D1 (SQLite)
-- **ORM**: Drizzle ORM
+- **Audio Library**: Howler.js
 - **Styling**: Tailwind CSS v4 + DaisyUI
 - **Deployment**: Cloudflare Workers
+- **TypeScript**: Full type safety
 
 ## Getting Started
 
@@ -28,18 +27,6 @@ Install the dependencies:
 
 ```bash
 npm install
-```
-
-### Database Setup
-
-1. **Run migrations** (creates tables):
-```bash
-npm run db:migrate
-```
-
-2. **Import seed data** (populates with mosque, ustadz, and schedule data):
-```bash
-npx wrangler d1 execute DB --local --file=scripts/seed.sql
 ```
 
 ### Development
@@ -52,12 +39,13 @@ npm run dev
 
 Your application will be available at `http://localhost:5173`.
 
-### Using the Application
+### Configuration
 
-- **View Schedule**: The app automatically shows the nearest upcoming Friday
-- **Navigate**: Click arrow buttons or swipe left/right to see other Fridays
-- **Search**: Type an ustadz name in the search box to find all their schedules
-- **Reserve List**: Cadangan Umum (reserve ustadz) are shown at the bottom
+Radio stream configuration is managed in `wrangler.jsonc`:
+
+- `STATION_TITLE`: Radio station name
+- `SHOUTCAST_URL`: Shoutcast server URL
+- `PLAYING_URL`: Streaming proxy URL
 
 ## Previewing the Production Build
 
@@ -99,8 +87,8 @@ npx wrangler versions deploy
 
 ## Styling
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+This project uses [Tailwind CSS](https://tailwindcss.com/) v4 and [DaisyUI](https://daisyui.com/) for styling.
 
 ---
 
-Built with ❤️ using React Router.
+Built with ❤️ using React Router and Cloudflare Workers.
